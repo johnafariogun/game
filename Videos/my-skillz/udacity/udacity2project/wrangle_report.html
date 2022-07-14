@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Data Wrangling Report</h1>
+    <ul>
+    <li><h2>Gathering data</h2> <br>
+        About the Dataset(s)
+        The dataset I'll be wrangling is the tweet archive of Twitter user @dog_rates 
+        https://twitter.com/dog_rates, also known as WeRateDogs. This archive/dataset consists of 2356 basic
+        tweet data from November, 2015 to August, 2017 all characterised by 17 column groupings. WeRateDogs is a Twitter account that rates people's
+        dogs with a humorous comment about the dog.
+        Based on the images in the above dataset (i.e. WeRateDogs Twitter archive), another dataset is
+        created which consists of image predictions (the top three only) alongside each tweet ID, image URL,
+        and the image number that corresponded to the most confident prediction (numbered 1 to 4 since
+        tweets can have up to four images). Though no wrangling will be done directly on this image predictions
+        dataset, it will definitely provide some additional data for our main tweet archive data which we will use in the course f our
+        analysis. <br>
+        <h3>Gather Twitter archive CSV file</h3><br>
+Using the link provided by Udacity, I downloaded the WeRateDogs Twitter archive manually as
+twitter_archive_enhanced.csv
+(https://d17h27t6h515a5.cloudfront.net/topher/2017/August/59a4e958_twitter-archiveenhanced/twitter-archive-enhanced.csv) file and imported this file into a dataframe (arc_df).
+<h3>Gather tweet image predictions</h3><br>
+I downloaded the tweet image predictions file hosted on Udacity's servers programmatically using
+Python's Requests library and saved it locally to image_predictions.tsv file. Then, I imported this file
+into a Python Pandas dataframe (image_df)
+<h3>Gather twitter status data</h3><br>
+This gathering should have being done using twitter api and the Tweepy library but due to technical difficulties it was done using the 
+Pandas requests library
+    </li>
+    <li><h2>Assessing Data</h2><br>
+    This assessment was carried out both visually and programmaticaly with the aim of achieving the project objective of getting 8 quality and 2 tidiness issues.
+    which were:
+    <h3>Quality issues:</h3>
+        <ol>
+            <li>ID columns in the three dataframe are in int format instead of str</li>
+            <li>many tweet_id(s) of enhanced_df table are missing in image (image predictions) and some in tweet_df tables</li>
+            <li>Timestamp column in enhanced_twitter is in object format instead of datetime format</li>
+            <li>unnecessary html tags in source column e.g. <a href=""http://twitter.com/download/iphone"" rel=""nofollow"">Twitter for iPhone</a>can be replaced with Twitter for iphone</li>
+            <li>the text column contains some links which are not needed</li>
+            <li>rating_denominator column has values greater than 10, which is the most prevalent, so reducing this so that most denominators are 10 for easy analysis</li>
+            <li>erroneous dog names which are unlikely (e.g. a, an, actually, by)</li>
+            <li>some tweet_id contain data which are in more than one dog stage</li>
+        </ol>
+        <h3>Tidiness issues:</h3>
+        <ol>
+            <li>the doggo, floofer, pupper and puppo columns in enhanced_df table should be merged into one column named "dog_stage"</li>
+            <li>some columns in the enhanced_df table are not needed for the analysis and should be dropped e.g retweeted_status_id, retweeted_status_user_id and retweeted_status_timestamp columns etc.</li>
+        </ol>
+    </li>
+    <li>
+        <h2>Cleaning Data:</h2><br>
+        Most of the quality and tidiness issues were in the enhanced_df dataframe so I made a copy
+        of dataframe, though i had to also create a copy of the other two dataframes for some cleaning before merging
+        the three dataframes to make the data analysis possible. I did this while following the steps- - Define, Code & Test.
+    </li>
+    <li><h2>Storing the Data</h2>
+    The final step after the analysis was saving the three cleaned dataframes and the master dataframe also and using for the final analysis as twitter_archive_master.csv file. 
+    </li>
+    </ul>   
+</body>
+</html>
